@@ -56,9 +56,9 @@
       
       <article>
         <img src="images/dhh.jpg" class="small avatar" />
-        <h3>History</h3>
+        <h3>2004</h3>
         <p>Extracted by <em>DHH</em>,<br /><em>David Heinemeier Hansson</em>,<br />from his work on <strong>Basecamp</strong><br/>
-        at <strong>37signals</strong> in 2004</p>
+        at <strong>37signals</strong>.</p>
       </article>
       
       <article>
@@ -71,18 +71,18 @@
       </article>
       
       <article>
-        <h3>Philosophy - CoC</h3>
-        <p><em style="font-size: 53px;">Convention over Configuration</em><br />A developer only needs to specify unconventional aspects of the application</p>
+        <h3>1. CoC (Convention over Configuration)</h3>
+        <p>A developer only needs to specify unconventional aspects of the application</p>
       </article>
       
       <article>
-        <h3>Philosophy - DRY</h3>
-        <p><em>Don’t Repeat Yourself</em><br />Every piece of knowledge must have a single, unambiguous, authoritative representation</p>
+        <h3>2. DRY (Don’t Repeat Yourself)</h3>
+        <p>Every piece of knowledge must have a single, unambiguous, authoritative representation</p>
       </article>
       
       <article>
-        <h3>Philosophy - Agile</h3>
-        <iframe src="http://agilemanifesto.org/"></iframe>
+        <h3>3. Agile Development</h3>
+        <img src="images/agilemanifesto.png" class="xlarge" />
       </article>
       
       <article>
@@ -90,22 +90,22 @@
       </article>
       
       <article>
-        <h3>Architecture - MVC</h3>
+        <h3>MVC</h3>
         <p><em>Model-View-Controller</em><br />A software architecture that isolates the business logic from the user interface</p>
       </article>
       
       <article>
-        <h3>Architecture - MVC</h3>
-        <img class="large" src="images/mvc.jpg" />
+        <h3>MVC</h3>
+        <img src="images/mvc.jpg" style="margin-top: 50px; height: 80%;" class="large" />
       </article>
       
       <article>
-        <h3>Architecture - REST</h3>
-        <p><em style="font-size: 53px;">REpresentational State Transfer</em><br />A style of software architecture for distributed hypermedia systems<br /> such as the Web</p>
+        <h3>REST (REpresentational State Transfer)</h3>
+        <p>A style of software architecture for distributed hypermedia systems such as the Web</p>
       </article>
       
       <article>
-        <h3>Architecture - REST</h3>
+        <h3>REST</h3>
         <ol>
           <li>A <strong>client</strong> makes a <strong>request</strong> for a <strong>resource</strong> on a server</li>
           <li>The <strong>server</strong> issues a <strong>response</strong> that includes a <strong>representation</strong> of the resource</li>
@@ -114,12 +114,12 @@
       </article>
       
       <article>
-        <h3>Architecture - REST</h3>
-        <p><em>RESTful Web Apps</em><br /> Maps CRUD operations to HTTP methods and use URLs to address resources</p>
+        <h3>RESTful Apps</h3>
+        <p>Maps CRUD operations to HTTP methods and use URLs to address resources</p>
       </article>
       
       <article>
-        <h3>Architecture - RESTful Routing</h3>
+        <h3>RESTful Routing</h3>
         <table>
           <tbody>
             <tr>
@@ -196,12 +196,12 @@
         <h3>Installation</h3>
         <pre>
 $ gem install rails
-# Successfully installed rails-3.2.1
+# Successfully installed rails-3.2.8
 # 1 gem installed
         </pre>
         <pre>
 $ rails -v
-# Rails 3.2.1
+# Rails 3.2.8
         </pre>
       </article>
       
@@ -211,7 +211,7 @@ $ rails -v
       
       <article>
         <h3>New App</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 $ rails new blog
       create  
       create  README.rdoc
@@ -229,12 +229,12 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
       
       <article>
         <h3>App Directory</h3>
-        <img class="large" src="images/app.png" />
+        <img src="images/app.png" class="xlarge" style="margin-top: 50px;" />
       </article>
       
       <article>
         <h3>Start Server</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 $ cd blog
 $ rails server
 => Booting WEBrick
@@ -254,7 +254,7 @@ $ rails server
       
       <article>
         <h3>1. Generate Scaffold</h3>
-        <pre style="font-size: 21px; line-height: 25px">
+        <pre>
 $ rails generate scaffold user name:string
       invoke  active_record
       create    db/migrate/20120203232042_create_users.rb
@@ -290,7 +290,7 @@ $ rails generate scaffold user name:string
       
       <article>
         <h3>2. Run Migration</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 $ rake db:migrate
 ==  CreateUsers: migrating ====================================================
 -- create_table(:users)
@@ -346,7 +346,7 @@ $ rake db:migrate
       
       <article>
         <h3>Validation</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/models/user.rb
 class User &lt; ActiveRecord::Base
   validates :name, :presence => true
@@ -361,7 +361,7 @@ end
       
       <article>
         <h3>Console</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 $ rails console
 Loading development environment (Rails 3.2.1)
 irb(main):001:0> User
@@ -385,7 +385,7 @@ irb(main):006:0> u.errors
       
       <article>
         <h3>Console</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 irb(main):007:0> u.name = 'Matz'
 => "Matz"
 irb(main):008:0> u.save
@@ -412,7 +412,7 @@ irb(main):011:0> u.destroy
       
       <article>
         <h3>Generate Resource</h3>
-        <pre style="font-size: 20px; line-height: 23px">
+        <pre>
 $ rails generate resource article title:string body:text
       invoke  active_record
       create    db/migrate/20120204130150_create_articles.rb
@@ -441,7 +441,7 @@ $ rails generate resource article title:string body:text
       
       <article>
         <h3>Route</code></h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # config/routes.rb
 Blog::Application.routes.draw do
   resources :articles
@@ -451,7 +451,7 @@ end
       
       <article>
         <h3>Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
 end
@@ -460,7 +460,7 @@ end
       
       <article>
         <h3>Model</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/models/article.rb
 class Article &lt; ActiveRecord::Base
 end
@@ -469,7 +469,7 @@ end
       
       <article>
         <h3>Migration</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # db/migrate/20120204130150_create_articles.rb
 class CreateArticles &lt; ActiveRecord::Migration
   def change
@@ -486,7 +486,7 @@ end
       
       <article>
         <h3>Run Migration</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 $ rake db:migrate
 ==  CreateArticles: migrating =================================================
 -- create_table(:articles)
@@ -497,7 +497,7 @@ $ rake db:migrate
       
       <article>
         <h3>Layout</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 # app/views/layouts/application.html.erb
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -522,7 +522,7 @@ $ rake db:migrate
       
       <article>
         <h3>Article List - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def index
@@ -534,7 +534,7 @@ end
       
       <article>
         <h3>Article List - View</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/index.html.erb --&gt;
 
 <%= link_to 'New Article', new_article_path %>
@@ -553,7 +553,7 @@ end
       
       <article>
         <h3>New Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def new
@@ -565,7 +565,7 @@ end
       
       <article>
         <h3>New Article - View</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/new.html.erb --&gt;
 &lt;h1&gt;New article&lt;/h1&gt;
 <%= form_for @article do |f| %>
@@ -596,7 +596,7 @@ end
       
       <article>
         <h3>Create Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def create
@@ -614,7 +614,7 @@ end
       
       <article>
         <h3>Show Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def show
@@ -626,7 +626,7 @@ end
       
       <article>
         <h3>Show Article - View</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/show.html.erb --&gt;
 &lt;h2&gt;<%= @article.title %>&lt;/h2&gt;
 <%= link_to 'Edit', edit_article_path(@article) %>
@@ -642,7 +642,7 @@ end
       
       <article>
         <h3>Edit Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def edit
@@ -654,7 +654,7 @@ end
       
       <article>
         <h3>Edit Article - View</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/edit.html.erb --&gt;
 &lt;h1&gt;Edit article&lt;/h1&gt;
 <%= form_for @article do |f| %>
@@ -680,7 +680,7 @@ end
       
       <article>
         <h3>Update Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def update
@@ -699,7 +699,7 @@ end
       
       <article>
         <h3>Destroy Article - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def destroy
@@ -713,7 +713,7 @@ end
       
       <article>
         <h3>Filters</h3>
-        <pre style="font-size: 17px; line-height: 20px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   before_filter :find_article, :only => [:show, :edit, :update, :destroy]
@@ -747,12 +747,12 @@ end
       
       <article>
         <h3>Partials</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/new.html.erb --&gt;
 &lt;h1&gt;New article&lt;/h1&gt;
 <%= render 'form' %>
         </pre>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/edit.html.erb --&gt;
 &lt;h1&gt;Edit article&lt;/h1&gt;
 <%= render 'form' %>
@@ -761,7 +761,7 @@ end
       
       <article>
         <h3>Partials</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 &lt;!-- app/views/articles/_form.html.erb --&gt;
 <%= form_for @article do |f| %>
   &lt;div&gt;
@@ -781,7 +781,7 @@ end
       
       <article>
         <h3>Validation - Model</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/models/article.rb
 class Article &lt; ActiveRecord::Base
   validates :title, :presence => true
@@ -792,7 +792,7 @@ end
       
       <article>
         <h3>Validation - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def create
@@ -809,7 +809,7 @@ end
       
       <article>
         <h3>Validation - Controller</h3>
-        <pre style="font-size: 25px; line-height: 35px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def update
@@ -826,7 +826,7 @@ end
       
       <article>
         <h3>Validation - View</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 &lt;!-- app/views/articles/_form.html.erb --&gt;
 <%= form_for @article do |f| %>
   <% if @article.errors.any? %>
@@ -861,7 +861,7 @@ end
       
       <article>
         <h3>The Flash - Controller</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 # app/controllers/articles_controller.rb
 class ArticlesController &lt; ApplicationController
   def create
@@ -879,7 +879,7 @@ end
       
       <article>
         <h3>The Flash - View</h3>
-        <pre style="font-size: 20px; line-height: 30px">
+        <pre>
 # app/views/layouts/application.html.erb
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
@@ -954,15 +954,35 @@ end
       </article>
       
       <article class="full">
+        <img src="images/rails-code.png" />
+      </article>
+      
+      <article class="full">
         <img src="images/rails-api.png" />
       </article>
       
       <article class="full">
-        <img src="images/rails-code.png" />
+        <img src="images/rails-for-zombies.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/ruby-on-rails-tutorial.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/railscasts.png" />
       </article>
       
       <article>
         <h1>Assignments</h1>
+      </article>
+      
+      <article>
+        <h3>Assignment #1</h3>
+        <ol>
+          <li>Install Rails 3.2</li>
+          <li>Finish the <strong>Getting Started</strong> guide</li>
+        </ol>
       </article>
       
       <article>
