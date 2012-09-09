@@ -1,74 +1,977 @@
 <!DOCTYPE html>
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Rails Course : " />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Rails Course</title>
+    <title>Introduction to Ruby on Rails</title>
+    <meta charset='utf-8'>
+    <script src='slides.js'></script>
   </head>
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+  </style>
+  <body style='display: none'>
+    <section class='slides layout-regular template-default'>
+      
+      <article>
+        <img src="images/rails.jpg" class="small" />
+        <h1>Introduction to<br /> Ruby on Rails</h1>
+        <address>
+          <div class="author_name">Hatem Mahmoud</div>
+          <div>ExpressionLab.com</div>
+        </address>
+      </article>
+      
+      <article>
+        <h3>Prerequisites</h3>
+        <p>Participants should have experience with Ruby.</p>
+      </article>
+      
+      <article>
+        <h3>Outline</h3>
+        <ul>
+          <li>History</li>
+          <li>Philosophy</li>
+          <li>Architecture</li>
+          <li>Installation</li>
+          <li>Scaffolding</li>
+          <li>Customization</li>
+          <li>Popular Apps</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h1>History</h1>
+      </article>
+      
+      <article>
+        <img src="images/dhh.jpg" class="small avatar" />
+        <h3>History</h3>
+        <p>Extracted by <em>DHH</em>,<br /><em>David Heinemeier Hansson</em>,<br />from his work on <strong>Basecamp</strong><br/>
+        at <strong>37signals</strong> in 2004</p>
+      </article>
+      
+      <article>
+        <h3>Ruby on Rails is...</h3>
+        <p>An open source<br />web application framework written in Ruby.</p>
+      </article>
+      
+      <article>
+        <h1>Philosophy</h1>
+      </article>
+      
+      <article>
+        <h3>Philosophy - CoC</h3>
+        <p><em style="font-size: 53px;">Convention over Configuration</em><br />A developer only needs to specify unconventional aspects of the application</p>
+      </article>
+      
+      <article>
+        <h3>Philosophy - DRY</h3>
+        <p><em>Don’t Repeat Yourself</em><br />Every piece of knowledge must have a single, unambiguous, authoritative representation</p>
+      </article>
+      
+      <article>
+        <h3>Philosophy - Agile</h3>
+        <iframe src="http://agilemanifesto.org/"></iframe>
+      </article>
+      
+      <article>
+        <h1>Architecture</h1>
+      </article>
+      
+      <article>
+        <h3>Architecture - MVC</h3>
+        <p><em>Model-View-Controller</em><br />A software architecture that isolates the business logic from the user interface</p>
+      </article>
+      
+      <article>
+        <h3>Architecture - MVC</h3>
+        <img class="large" src="images/mvc.jpg" />
+      </article>
+      
+      <article>
+        <h3>Architecture - REST</h3>
+        <p><em style="font-size: 53px;">REpresentational State Transfer</em><br />A style of software architecture for distributed hypermedia systems<br /> such as the Web</p>
+      </article>
+      
+      <article>
+        <h3>Architecture - REST</h3>
+        <ol>
+          <li>A <strong>client</strong> makes a <strong>request</strong> for a <strong>resource</strong> on a server</li>
+          <li>The <strong>server</strong> issues a <strong>response</strong> that includes a <strong>representation</strong> of the resource</li>
+          <li>Communication is <strong>stateless</strong></li>
+        </ol>
+      </article>
+      
+      <article>
+        <h3>Architecture - REST</h3>
+        <p><em>RESTful Web Apps</em><br /> Maps CRUD operations to HTTP methods and use URLs to address resources</p>
+      </article>
+      
+      <article>
+        <h3>Architecture - RESTful Routing</h3>
+        <table>
+          <tbody>
+            <tr>
+              <th>Verb</th>
+              <th>Path</th>
+              <th>Action</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos</td>
+              <td>index</td>
+              <td>Display a list of photos</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/new</td>
+              <td>new</td>
+              <td>Return a form for a new photo</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>/photos</td>
+              <td>create</td>
+              <td>Create a new photo</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/:id</td>
+              <td>show</td>
+              <td>Display a photo</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/photos/:id/edit</td>
+              <td>edit</td>
+              <td>Return a form to edit a photo</td>
+            </tr>
+            <tr>
+              <td>PUT</td>
+              <td>/photos/:id</td>
+              <td>update</td>
+              <td>Update a photo</td>
+            </tr>
+            <tr>
+              <td>DELETE</td>
+              <td>/photos/:id</td>
+              <td>destroy</td>
+              <td>Delete a photo</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+      
+      <article>
+        <h3>Environments</h3>
+        <p>Different stages:<br /> development, testing, production</p>
+      </article>
+      
+      <article>
+        <h1>Installation</h1>
+      </article>
+      
+      <article>
+        <h3>Installation</h3>
+        <ol>
+          <li>Install Ruby</li>
+          <li>Install a database engine:<br /> SQLite3, MySQL, PostgreSQL, etc.</li>
+          <li>Install Rails gem</li>
+        </ol>
+      </article>
+      
+      <article>
+        <h3>Installation</h3>
+        <pre>
+$ gem install rails
+# Successfully installed rails-3.2.1
+# 1 gem installed
+        </pre>
+        <pre>
+$ rails -v
+# Rails 3.2.1
+        </pre>
+      </article>
+      
+      <article>
+        <h1>Scaffolding</h1>
+      </article>
+      
+      <article>
+        <h3>New App</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+$ rails new blog
+      create  
+      create  README.rdoc
+      ...
+         run  bundle install
+...
+Using rake (0.9.2.2) 
+Using i18n (0.6.0) 
+...
+Installing sqlite3 (1.3.5) with native extensions 
+Installing uglifier (1.2.3) 
+Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
+        </pre>
+      </article>
+      
+      <article>
+        <h3>App Directory</h3>
+        <img class="large" src="images/app.png" />
+      </article>
+      
+      <article>
+        <h3>Start Server</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+$ cd blog
+$ rails server
+=> Booting WEBrick
+=> Rails 3.2.1 application starting in development on http://0.0.0.0:3000
+=> Call with -d to detach
+=> Ctrl-C to shutdown server
+[2012-02-04 00:28:43] INFO  WEBrick 1.3.1
+[2012-02-04 00:28:43] INFO  ruby 1.9.3 (2011-10-30) [x86_64-darwin11.0.0]
+[2012-02-04 00:28:43] INFO  WEBrick::HTTPServer#start: pid=4447 port=3000
+        </pre>
+      </article>
+      
+      <article>
+        <h3><em>http://localhost:3000</em></h3>
+        <img class="xlarge" src="images/welcome-aboard.png" />
+      </article>
+      
+      <article>
+        <h3>1. Generate Scaffold</h3>
+        <pre style="font-size: 21px; line-height: 25px">
+$ rails generate scaffold user name:string
+      invoke  active_record
+      create    db/migrate/20120203232042_create_users.rb
+      create    app/models/user.rb
+      invoke    test_unit
+      create      test/unit/user_test.rb
+      create      test/fixtures/users.yml
+       route  resources :users
+      invoke  scaffold_controller
+      create    app/controllers/users_controller.rb
+      invoke    erb
+      create      app/views/users
+      create      app/views/users/index.html.erb
+      create      app/views/users/edit.html.erb
+      create      app/views/users/show.html.erb
+      create      app/views/users/new.html.erb
+      create      app/views/users/_form.html.erb
+      invoke    test_unit
+      create      test/functional/users_controller_test.rb
+      invoke    helper
+      create      app/helpers/users_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/users_helper_test.rb
+      invoke  assets
+      invoke    coffee
+      create      app/assets/javascripts/users.js.coffee
+      invoke    scss
+      create      app/assets/stylesheets/users.css.scss
+      invoke  scss
+      create    app/assets/stylesheets/scaffolds.css.scss
+        </pre>
+      </article>
+      
+      <article>
+        <h3>2. Run Migration</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+$ rake db:migrate
+==  CreateUsers: migrating ====================================================
+-- create_table(:users)
+   -> 0.0060s
+==  CreateUsers: migrated (0.0060s) ===========================================
+        </pre>
+      </article>
+      
+      <article>
+        <h3>3. Done!</h3>
+        <img class="xlarge" src="images/users-index.png" />
+      </article>
+      
+      <article>
+        <h3>New User</h3>
+        <img class="xlarge" src="images/users-new.png" />
+      </article>
+      
+      <article>
+        <h3>User Created</h3>
+        <img class="xlarge" src="images/users-created.png" />
+      </article>
+      
+      <article>
+        <h3>List Users</h3>
+        <img class="xlarge" src="images/users-index-02.png" />
+      </article>
+      
+      <article>
+        <h3>Show User</h3>
+        <img class="xlarge" src="images/users-show.png" />
+      </article>
+      
+      <article>
+        <h3>Edit User</h3>
+        <img class="xlarge" src="images/users-edit.png" />
+      </article>
+      
+      <article>
+        <h3>User Updated</h3>
+        <img class="xlarge" src="images/users-updated.png" />
+      </article>
+      
+      <article>
+        <h3>Delete User</h3>
+        <img class="centered" style="margin-top: 130px;" src="images/users-destroy.png" />
+      </article>
+      
+      <article>
+        <h3>User Destroyed</h3>
+        <img class="xlarge" src="images/users-destroyed.png" />
+      </article>
+      
+      <article>
+        <h3>Validation</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/models/user.rb
+class User &lt; ActiveRecord::Base
+  validates :name, :presence => true
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation</h3>
+        <img class="xlarge" src="images/users-new-error.png" />
+      </article>
+      
+      <article>
+        <h3>Console</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+$ rails console
+Loading development environment (Rails 3.2.1)
+irb(main):001:0> User
+=> User(id: integer, name: string, created_at: datetime, updated_at: datetime)
+irb(main):002:0> User.count
+   (0.1ms)  SELECT COUNT(*) FROM "users" 
+=> 1
+irb(main):003:0> User.first
+  User Load (0.2ms)  SELECT "users".* FROM "users" LIMIT 1
+=> #&lt;User id: 1, name: "Hatem", created_at: "2012-02-04 13:30:22", updated_at: "2012-02-04 13:30:22"&gt;
+irb(main):004:0> u = User.new
+=> #&lt;User id: nil, name: nil, created_at: nil, updated_at: nil&gt;
+irb(main):005:0> u.save
+   (0.1ms)  begin transaction
+   (0.1ms)  rollback transaction
+=> false
+irb(main):006:0> u.errors
+=> #&lt;ActiveModel::Errors:0x007fd17c276668 @base=#&lt;User id: nil, name: nil, created_at: nil, updated_at: nil&gt;, @messages={:name=>["can't be blank"]}&gt;
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Console</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+irb(main):007:0> u.name = 'Matz'
+=> "Matz"
+irb(main):008:0> u.save
+   (0.1ms)  begin transaction
+  SQL (4.9ms)  INSERT INTO "users" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sun, 05 Feb 2012 05:52:26 UTC +00:00], ["name", "Matz"], ["updated_at", Sun, 05 Feb 2012 05:52:26 UTC +00:00]]
+   (2.3ms)  commit transaction
+=> true
+irb(main):009:0> User.count
+   (0.1ms)  SELECT COUNT(*) FROM "users" 
+=> 2
+irb(main):010:0> User.last
+  User Load (0.1ms)  SELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT 1
+=> #&lt;User id: 2, name: "Matz", created_at: "2012-02-05 05:52:26", updated_at: "2012-02-05 05:52:26"&gt;
+irb(main):011:0> u.destroy
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  DELETE FROM "users" WHERE "users"."id" = ?  [["id", 2]]
+   (2.3ms)  commit transaction
+        </pre>
+      </article>
+      
+      <article>
+        <h1>Customization</h1>
+      </article>
+      
+      <article>
+        <h3>Generate Resource</h3>
+        <pre style="font-size: 20px; line-height: 23px">
+$ rails generate resource article title:string body:text
+      invoke  active_record
+      create    db/migrate/20120204130150_create_articles.rb
+      create    app/models/article.rb
+      invoke    test_unit
+      create      test/unit/article_test.rb
+      create      test/fixtures/articles.yml
+      invoke  controller
+      create    app/controllers/articles_controller.rb
+      invoke    erb
+      create      app/views/articles
+      invoke    test_unit
+      create      test/functional/articles_controller_test.rb
+      invoke    helper
+      create      app/helpers/articles_helper.rb
+      invoke      test_unit
+      create        test/unit/helpers/articles_helper_test.rb
+      invoke    assets
+      invoke      coffee
+      create        app/assets/javascripts/articles.js.coffee
+      invoke      scss
+      create        app/assets/stylesheets/articles.css.scss
+       route  resources :articles
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Route</code></h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# config/routes.rb
+Blog::Application.routes.draw do
+  resources :articles
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Model</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/models/article.rb
+class Article &lt; ActiveRecord::Base
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Migration</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# db/migrate/20120204130150_create_articles.rb
+class CreateArticles &lt; ActiveRecord::Migration
+  def change
+    create_table :articles do |t|
+      t.string :title
+      t.text :body
 
-  <body>
+      t.timestamps
+    end
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Run Migration</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+$ rake db:migrate
+==  CreateArticles: migrating =================================================
+-- create_table(:articles)
+   -> 0.0011s
+==  CreateArticles: migrated (0.0011s) ========================================
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Layout</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+# app/views/layouts/application.html.erb
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Blog&lt;/title&gt;
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;<%= link_to 'My Blog', articles_path %>&lt;/h1&gt;
+  <%= yield %>
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Layout</h3>
+        <img class="xlarge" src="images/articles-layout.png" />
+      </article>
+      
+      <article>
+        <h3>Article List - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def index
+    @articles = Article.all
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Article List - View</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/index.html.erb --&gt;
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/hatem/rails-course">View on GitHub</a>
+<%= link_to 'New Article', new_article_path %>
 
-          <h1 id="project_title">Rails Course</h1>
-          <h2 id="project_tagline"></h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/hatem/rails-course/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/hatem/rails-course/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Rails Course maintained by <a href="https://github.com/hatem">hatem</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
+<% @articles.each do |article| %>
+  &lt;h2&gt;<%= link_to article.title, article %>&lt;/h2&gt;
+  &lt;div&gt;<%= article.body %>&lt;/div&gt;
+<% end %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Article List</h3>
+        <img class="xlarge" src="images/articles-index.png" />
+      </article>
+      
+      <article>
+        <h3>New Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def new
+    @article = Article.new
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>New Article - View</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/new.html.erb --&gt;
+&lt;h1&gt;New article&lt;/h1&gt;
+<%= form_for @article do |f| %>
+  &lt;div&gt;
+    <%= f.label :title %>&lt;br /&gt;
+    <%= f.text_field :title %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.label :body %>&lt;br /&gt;
+    <%= f.text_area :body %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.submit %>
+  &lt;/div&gt;
+<% end %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>New Article</h3>
+        <img class="xlarge" src="images/articles-new.png" />
+      </article>
+      
+      <article>
+        <h3>Create Article - Error</h3>
+        <img class="xlarge" src="images/articles-create-error.png" />
+      </article>
+      
+      <article>
+        <h3>Create Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def create
+    @article = Article.create(params[:article])
+    redirect_to articles_path
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Article Created</h3>
+        <img class="xlarge" src="images/articles-created.png" />
+      </article>
+      
+      <article>
+        <h3>Show Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def show
+    @article = Article.find(params[:id])
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Show Article - View</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/show.html.erb --&gt;
+&lt;h2&gt;<%= @article.title %>&lt;/h2&gt;
+<%= link_to 'Edit', edit_article_path(@article) %>
+<%= link_to 'Delete', @article, confirm: 'Are you sure?', method: :delete %>
+&lt;div&gt;<%= @article.body %>&lt;/div&gt;
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Article Show</h3>
+        <img class="xlarge" src="images/articles-show.png" />
+      </article>
+      
+      <article>
+        <h3>Edit Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def edit
+    @article = Article.find(params[:id])
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Edit Article - View</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/edit.html.erb --&gt;
+&lt;h1&gt;Edit article&lt;/h1&gt;
+<%= form_for @article do |f| %>
+  &lt;div&gt;
+    <%= f.label :title %>&lt;br /&gt;
+    <%= f.text_field :title %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.label :body %>&lt;br /&gt;
+    <%= f.text_area :body %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.submit %>
+  &lt;/div&gt;
+<% end %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Edit Article</h3>
+        <img class="xlarge" src="images/articles-edit.png" />
+      </article>
+      
+      <article>
+        <h3>Update Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def update
+    @article = Article.find(params[:id])
+    @article.update_attributes(params[:article])
+    redirect_to @article
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Article Updated</h3>
+        <img class="xlarge" src="images/articles-updated.png" />
+      </article>
+      
+      <article>
+        <h3>Destroy Article - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    redirect_to articles_path
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Filters</h3>
+        <pre style="font-size: 17px; line-height: 20px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  before_filter :find_article, :only => [:show, :edit, :update, :destroy]
+  
+  def show
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @article.update_attributes(params[:article])
+      redirect_to @article
+    else
+      render :edit
+    end
+  end
+  
+  def destroy
+    @article.destroy
+    redirect_to articles_path
+  end
+  
+  private
+  def find_article
+    @article = Article.find(params[:id])
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Partials</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/new.html.erb --&gt;
+&lt;h1&gt;New article&lt;/h1&gt;
+<%= render 'form' %>
+        </pre>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/edit.html.erb --&gt;
+&lt;h1&gt;Edit article&lt;/h1&gt;
+<%= render 'form' %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Partials</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+&lt;!-- app/views/articles/_form.html.erb --&gt;
+<%= form_for @article do |f| %>
+  &lt;div&gt;
+    <%= f.label :title %>&lt;br /&gt;
+    <%= f.text_field :title %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.label :body %>&lt;br /&gt;
+    <%= f.text_area :body %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.submit %>
+  &lt;/div&gt;
+<% end %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation - Model</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/models/article.rb
+class Article &lt; ActiveRecord::Base
+  validates :title, :presence => true
+  validates :body, :length => { :minimum => 5 }
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def create
+    @article = Article.new(params[:article])
+    if @article.save
+      redirect_to articles_path
+    else
+      render :new
+    end
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation - Controller</h3>
+        <pre style="font-size: 25px; line-height: 35px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def update
+    @article = Article.find(params[:id])
+    if @article.update_attributes(params[:article])
+      redirect_to @article
+    else
+      render :edit
+    end
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation - View</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+&lt;!-- app/views/articles/_form.html.erb --&gt;
+<%= form_for @article do |f| %>
+  <% if @article.errors.any? %>
+    &lt;div id="error_explanation"&gt;
+      &lt;h2&gt;<%= pluralize(@article.errors.count, "error") %>&lt;/h2&gt;
+      &lt;ul&gt;
+        <% @article.errors.full_messages.each do |msg| %>
+          &lt;li&gt;<%= msg %>&lt;/li&gt;
+        <% end %>
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  <% end %>
+  &lt;div&gt;
+    <%= f.label :title %>&lt;br /&gt;
+    <%= f.text_field :title %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.label :body %>&lt;br /&gt;
+    <%= f.text_area :body %>
+  &lt;/div&gt;
+  &lt;div&gt;
+    <%= f.submit %>
+  &lt;/div&gt;
+<% end %>
+        </pre>
+      </article>
+      
+      <article>
+        <h3>Validation - Errors</h3>
+        <img class="xlarge" src="images/articles-new-error.png" />
+      </article>
+      
+      <article>
+        <h3>The Flash - Controller</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+# app/controllers/articles_controller.rb
+class ArticlesController &lt; ApplicationController
+  def create
+    @article = Article.new(params[:article])
+    if @article.save
+      flash[:notice] = 'Article was successfully created.'
+      redirect_to articles_path
+    else
+      render :new
+    end
+  end
+end
+        </pre>
+      </article>
+      
+      <article>
+        <h3>The Flash - View</h3>
+        <pre style="font-size: 20px; line-height: 30px">
+# app/views/layouts/application.html.erb
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Blog&lt;/title&gt;
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;<%= link_to 'My Blog', articles_path %>&lt;/h1&gt;
+  <% if flash[:notice] %>
+    &lt;p id="notice"&gt;<%= flash[:notice] %>&lt;/p&gt;
+  <% end %>
+  <%= yield %>
+&lt;/body&gt;
+&lt;/html&gt;
+        </pre>
+      </article>
+      
+      <article>
+        <h3>The Flash</h3>
+        <img class="xlarge" src="images/articles-notice.png" />
+      </article>
+      
+      <article>
+        <h1>Popular Apps</h1>
+      </article>
+      
+      <article class="full">
+        <img src="images/basecamp.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/twitter.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/github.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/yellowpages.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/slideshare.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/radiantcms.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/refinerycms.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/redmine.png" />
+      </article>
+      
+      <article>
+        <h1>Resources</h1>
+      </article>
+      
+      <article class="full">
+        <img src="images/rubyonrails.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/rails-guides.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/rails-api.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/rails-code.png" />
+      </article>
+      
+      <article>
+        <h1>Assignments</h1>
+      </article>
+      
+      <article>
+        <h1>Thank You!</h1>
+        <address>
+          <div class="author_name">Hatem Mahmoud</div>
+          <div>ExpressionLab.com</div>
+        </address>
+      </article>
+    </section>
   </body>
 </html>
