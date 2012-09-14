@@ -346,17 +346,16 @@ $ cd blog
 $ rails server</pre>
         <pre>
 => Booting WEBrick
-=> Rails 3.2.1 application starting in development on http://0.0.0.0:3000
+=> Rails 3.2.8 application starting in development on http://0.0.0.0:3000
 => Call with -d to detach
 => Ctrl-C to shutdown server
-[2012-02-04 00:28:43] INFO  WEBrick 1.3.1
-[2012-02-04 00:28:43] INFO  ruby 1.9.3 (2011-10-30) [x86_64-darwin11.0.0]
-[2012-02-04 00:28:43] INFO  WEBrick::HTTPServer#start: pid=4447 port=3000</pre>
+[2012-09-13 19:48:45] INFO  WEBrick 1.3.1
+[2012-09-13 19:48:45] INFO  ruby 1.9.3 (2011-10-30) [x86_64-darwin11.0.0]
+[2012-09-13 19:48:45] INFO  WEBrick::HTTPServer#start: pid=35547 port=3000</pre>
       </article>
       
-      <article>
-        <h3><em>http://localhost:3000</em></h3>
-        <img class="xlarge" src="images/welcome-aboard.png" />
+      <article class="full">
+        <img src="images/welcome-aboard.png" />
       </article>
       
       <article>
@@ -366,93 +365,86 @@ $ rails server</pre>
       <article>
         <h3>1. Scaffold a Resource</h3>
         <pre>
-$ rails generate scaffold user name:string
-      invoke  active_record
-      create    db/migrate/20120203232042_create_users.rb
-      create    app/models/user.rb
-      invoke    test_unit
-      create      test/unit/user_test.rb
-      create      test/fixtures/users.yml
-       route  resources :users
-      invoke  scaffold_controller
-      create    app/controllers/users_controller.rb
-      invoke    erb
-      create      app/views/users
-      create      app/views/users/index.html.erb
-      create      app/views/users/edit.html.erb
-      create      app/views/users/show.html.erb
-      create      app/views/users/new.html.erb
-      create      app/views/users/_form.html.erb
-      invoke    test_unit
-      create      test/functional/users_controller_test.rb
-      invoke    helper
-      create      app/helpers/users_helper.rb
-      invoke      test_unit
-      create        test/unit/helpers/users_helper_test.rb
-      invoke  assets
-      invoke    coffee
-      create      app/assets/javascripts/users.js.coffee
-      invoke    scss
-      create      app/assets/stylesheets/users.css.scss
-      invoke  scss
-      create    app/assets/stylesheets/scaffolds.css.scss
-        </pre>
+$ rails generate scaffold article title:string content:text</pre>
+        <pre>
+  invoke  active_record
+  create    db/migrate/20120913204150_create_articles.rb
+  create    app/models/article.rb
+  invoke    test_unit
+  create      test/unit/article_test.rb
+  create      test/fixtures/articles.yml
+  invoke  resource_route
+   route    resources :articles
+  invoke  scaffold_controller
+  create    app/controllers/articles_controller.rb
+  invoke    erb
+  create      app/views/articles
+  create      app/views/articles/index.html.erb
+  create      app/views/articles/edit.html.erb
+  create      app/views/articles/show.html.erb
+  create      app/views/articles/new.html.erb
+  create      app/views/articles/_form.html.erb
+  invoke    test_unit
+  create      test/functional/articles_controller_test.rb
+  invoke    helper
+  create      app/helpers/articles_helper.rb
+  invoke      test_unit
+  create        test/unit/helpers/articles_helper_test.rb
+  invoke  assets
+  invoke    coffee
+  create      app/assets/javascripts/articles.js.coffee
+  invoke    scss
+  create      app/assets/stylesheets/articles.css.scss
+  invoke  scss
+  create    app/assets/stylesheets/scaffolds.css.scss
+    </pre>
       </article>
       
       <article>
         <h3>2. Run the Migration</h3>
         <pre>
-$ rake db:migrate
-==  CreateUsers: migrating ====================================================
--- create_table(:users)
-   -> 0.0060s
-==  CreateUsers: migrated (0.0060s) ===========================================
-        </pre>
+$ rake db:migrate</pre>
+        <pre>
+==  CreateArticles: migrating =================================================
+-- create_table(:articles)
+   -> 0.0010s
+==  CreateArticles: migrated (0.0010s) ========================================</pre>
       </article>
       
-      <article>
-        <h3>3. Browse the App</h3>
-        <img class="xlarge" src="images/users-index.png" />
+      <article class="full">
+        <img src="images/articles-index-empty.png" />
       </article>
       
-      <article>
-        <h3>New User</h3>
-        <img class="xlarge" src="images/users-new.png" />
+      <article class="full">
+        <img src="images/articles-new.png" />
       </article>
       
-      <article>
-        <h3>User Created</h3>
-        <img class="xlarge" src="images/users-created.png" />
+      <article class="full">
+        <img src="images/articles-created.png" />
       </article>
       
-      <article>
-        <h3>List Users</h3>
-        <img class="xlarge" src="images/users-index-02.png" />
+      <article class="full">
+        <img src="images/articles-index-created.png" />
       </article>
       
-      <article>
-        <h3>Show User</h3>
-        <img class="xlarge" src="images/users-show.png" />
+      <article class="full">
+        <img src="images/articles-edit.png" />
       </article>
       
-      <article>
-        <h3>Edit User</h3>
-        <img class="xlarge" src="images/users-edit.png" />
+      <article class="full">
+        <img src="images/articles-updated.png" />
       </article>
       
-      <article>
-        <h3>User Updated</h3>
-        <img class="xlarge" src="images/users-updated.png" />
+      <article class="full">
+        <img src="images/articles-index-updated.png" />
       </article>
       
-      <article>
-        <h3>Delete User</h3>
-        <img class="centered" style="margin-top: 130px;" src="images/users-destroy.png" />
+      <article class="full">
+        <img src="images/articles-destroy.png" />
       </article>
       
-      <article>
-        <h3>User Destroyed</h3>
-        <img class="xlarge" src="images/users-destroyed.png" />
+      <article class="full">
+        <img src="images/articles-index-destroyed.png" />
       </article>
       
       <article>
