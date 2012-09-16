@@ -39,15 +39,23 @@
       
       <article>
         <h3>Outline</h3>
-        <ul>
+        <ul style="float: left; width: 400px;">
           <li>History</li>
           <li>Philosophy</li>
           <li>Architecture</li>
           <li>Installation</li>
           <li>Hello, World!</li>
           <li>Scaffolding</li>
-          <li>Customization</li>
+          <li>Validation</li>
+        </ul>
+        <ul>
+          <li>Console</li>
+          <li>Root Route</li>
+          <li>Associated Models</li>
+          <li>Nested Models</li>
+          <li>Helpers</li>
           <li>Popular Projects</li>
+          <li>Resources</li>
         </ul>
       </article>
       
@@ -72,12 +80,12 @@
       </article>
       
       <article>
-        <h3>1. CoC (Convention over Configuration)</h3>
+        <h3>1. Convention over Configuration</h3>
         <p>A developer only needs to specify unconventional aspects of the application</p>
       </article>
       
       <article>
-        <h3>2. DRY (Don’t Repeat Yourself)</h3>
+        <h3>2. DRY - Don’t Repeat Yourself</h3>
         <p>Every piece of knowledge must have a single, unambiguous, authoritative representation</p>
       </article>
       
@@ -173,11 +181,6 @@
             </tr>
           </tbody>
         </table>
-      </article>
-      
-      <article>
-        <h3>Environments</h3>
-        <p>Different stages:<br /> development, testing, production</p>
       </article>
       
       <article>
@@ -785,8 +788,8 @@ end</pre>
         <pre>
 $ rails console
 Loading development environment (Rails 3.2.8)
-irb(main):001:0> a = Article.new(title: 'My second article')
-=> #&lt;Article id: nil, title: "My second article", content: nil, created_at: nil, updated_at: nil>
+irb(main):001:0> a = Article.new(title: 'My title')
+=> #&lt;Article id: nil, title: "My title", content: nil, created_at: nil, updated_at: nil>
 irb(main):002:0> a.save
    (0.1ms)  begin transaction
    (0.1ms)  rollback transaction
@@ -799,11 +802,11 @@ irb(main):003:0> a.errors.full_messages
       <article>
         <h3>Console</h3>
         <pre>
-irb(main):004:0> a.content = 'Here is the content of my second article.'
-=> "Here is the content of my second article."
+irb(main):004:0> a.content = 'My content.'
+=> "My content."
 irb(main):005:0> a.save
    (0.1ms)  begin transaction
-  SQL (21.3ms)  INSERT INTO "articles" ("content", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["content", "Here is the content of my second article."], ["created_at", Sat, 15 Sep 2012 10:45:17 UTC +00:00], ["title", "My second article"], ["updated_at", Sat, 15 Sep 2012 10:45:17 UTC +00:00]]
+  SQL (21.3ms)  INSERT INTO "articles" ("content", "created_at", "title", "updated_at") VALUES (?, ?, ?, ?)  [["content", "My content."], ["created_at", Sat, 15 Sep 2012 10:45:17 UTC +00:00], ["title", "My title"], ["updated_at", Sat, 15 Sep 2012 10:45:17 UTC +00:00]]
    (2.2ms)  commit transaction
 => true
 irb(main):006:0> Article.count
@@ -811,16 +814,16 @@ irb(main):006:0> Article.count
 => 2
 irb(main):007:0> Article.last.title
   Article Load (0.2ms)  SELECT "articles".* FROM "articles" ORDER BY "articles"."id" DESC LIMIT 1
-=> "My second article"
+=> "My title"
 </pre>
       </article>
       
       <article>
-        <h1>Home Page</h1>
+        <h1>Root Route</h1>
       </article>
       
       <article>
-        <h3>Home Page</h3>
+        <h3>Root Route</h3>
         <pre>
 # config/routes.rb
 Blog::Application.routes.draw do
@@ -832,6 +835,18 @@ end
       
       <article class="full">
         <img src="images/home.png" />
+      </article>
+      
+      <article>
+        <h1>Associated Models</h1>
+      </article>
+      
+      <article>
+        <h1>Nested Models</h1>
+      </article>
+      
+      <article>
+        <h1>Helpers</h1>
       </article>
       
       <article>
@@ -872,6 +887,15 @@ end
       
       <article class="full">
         <img src="images/redmine.png" />
+      </article>
+      
+      <article>
+        <h1>Job Trends</h1>
+      </article>
+      
+      <article>
+        <h3>Job Trends</h3>
+        <img src="images/job-trends.png" class="xlarge" style="margin-top: 30px; height: 80%;" />
       </article>
       
       <article>
