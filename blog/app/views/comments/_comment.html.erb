@@ -1,0 +1,5 @@
+<p>
+  <b><%= comment.name %></b>
+  [<%= link_to 'Delete', [@article, comment], confirm: 'Delete comment?', method: :delete %>]<br />
+  <%= comment.content %>
+</p>

@@ -698,8 +698,8 @@ end
         <h3>Views</h3>
         <pre>
 &lt;!-- app/views/articles/show.html.erb --&gt;
-&lt;p>Title: <%= @article.title %>&lt;/p>
-&lt;p>Content: <%= @article.content %>&lt;/p>
+&lt;p>&lt;b>Title:&lt;/b> <%= @article.title %>&lt;/p>
+&lt;p>&lt;b>Content:&lt;/b> <%= @article.content %>&lt;/p>
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
 </pre>
@@ -770,7 +770,6 @@ end
 class Article < ActiveRecord::Base
   validates :title, :presence => true,
                     :length => { :minimum => 5 }
-  
   validates :content, :presence => true
 end</pre>
       </article>
@@ -839,6 +838,185 @@ end
       
       <article>
         <h1>Associated Models</h1>
+      </article>
+      
+      <article>
+        <h3>1. Generate Model</h3>
+        <pre>
+$ rails generate model comment article:references name:string content:text</pre>
+        <pre>
+  invoke  active_record
+  create    db/migrate/20120922050616_create_comments.rb
+  create    app/models/comment.rb
+  invoke    test_unit
+  create      test/unit/comment_test.rb
+  create      test/fixtures/comments.yml
+</pre>
+      </article>
+      
+      <article>
+        <h3>Model</h3>
+        <pre>
+# app/models/comment.rb
+class Comment < ActiveRecord::Base
+  belongs_to :article
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>Migration</h3>
+        <pre>
+# db/migrate/20120922050616_create_comments.rb
+class CreateComments < ActiveRecord::Migration
+  def change
+    create_table :comments do |t|
+      t.references :article
+      t.string :name
+      t.text :content
+      t.timestamps
+    end
+    add_index :comments, :article_id
+  end
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>2. Run Migration</h3>
+        <pre>
+$ rake db:migrate</pre>
+        <pre>
+==  CreateComments: migrating =================================================
+-- create_table(:comments)
+   -> 0.0059s
+-- add_index(:comments, :article_id)
+   -> 0.0005s
+==  CreateComments: migrated (0.0065s) ========================================
+</pre>
+      </article>
+      
+      <article>
+        <h3>3. Associate Models</h3>
+        <pre>
+# app/models/article.rb
+class Article < ActiveRecord::Base
+  validates :title, :presence => true,
+                    :length => { :minimum => 5 }
+  validates :content, :presence => true
+  has_many :comments, :dependent => :destroy
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>4. Add Route</h3>
+        <pre>
+# config/routes.rb
+Blog::Application.routes.draw do
+  resources :articles do
+    resources :comments
+  end
+  root to: 'articles#index'
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>5. Generate Controller</h3>
+        <pre>
+$ rails generate controller comments</pre>
+        <pre>
+  create  app/controllers/comments_controller.rb
+  invoke  erb
+  create    app/views/comments
+  invoke  test_unit
+  create    test/functional/comments_controller_test.rb
+  invoke  helper
+  create    app/helpers/comments_helper.rb
+  invoke    test_unit
+  create      test/unit/helpers/comments_helper_test.rb
+  invoke  assets
+  invoke    coffee
+  create      app/assets/javascripts/comments.js.coffee
+  invoke    scss
+  create      app/assets/stylesheets/comments.css.scss
+</pre>
+      </article>
+      
+      <article>
+        <h3>Add Actions</h3>
+        <pre>
+# app/controllers/comments_controller.rb
+class CommentsController < ApplicationController
+  def create
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.create(params[:comment])
+    redirect_to @article, notice: 'Comment was successfully created.'
+  end
+ 
+  def destroy
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    @comment.destroy
+    redirect_to @article
+  end
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>6. Update Views</h3>
+        <pre>
+&lt;!-- app/views/articles/show.html.erb --&gt;
+&lt;p>&lt;b>Title:&lt;/b> <%= @article.title %>&lt;/p>
+&lt;p>&lt;b>Content:&lt;/b> <%= @article.content %>&lt;/p>
+
+&lt;h2>Comments&lt;/h2>
+<%= render @article.comments %>
+ 
+&lt;h2>Add Comment&lt;/h2>
+<%= render 'comments/form' %>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+</pre>
+      </article>
+      
+      <article>
+        <h3>6. Update Views</h3>
+        <pre>
+&lt;!-- app/views/comments/_comment.html.erb --&gt;
+&lt;p>
+  &lt;b><%= comment.name %>&lt;/b>
+  [<%= link_to 'Delete', [@article, comment], confirm: 'Delete comment?', method: :delete %>]&lt;br />
+  <%= comment.content %>
+&lt;/p>
+</pre>
+      </article>
+      
+      <article>
+        <h3>6. Update Views</h3>
+        <pre>
+&lt;!-- app/views/comments/_form.html.erb --&gt;
+<%= form_for([@article, @article.comments.new]) do |f| %>
+  &lt;div class="field">
+    <%= f.label :name %>&lt;br />
+    <%= f.text_field :name %>
+  &lt;/div>
+  &lt;div class="field">
+    <%= f.label :content %>&lt;br />
+    <%= f.text_area :content %>
+  &lt;/div>
+  &lt;div class="actions">
+    <%= f.submit %>
+  &lt;/div>
+<% end %>
+</pre>
+      </article>
+      
+      <article class="full">
+        <img src="images/articles-comment-created.png" />
       </article>
       
       <article>
