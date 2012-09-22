@@ -1,6 +1,6 @@
 <p><b>Title:</b> <%= @article.title %></p>
 <p><b>Content:</b> <%= @article.content %></p>
-<p><b>Tags:</b> <%= @article.tags.map { |t| t.name }.join(', ') %></p>
+<p><b>Tags:</b> <%= join_tags @article %></p>
 
 <h2>Comments</h2>
 <%= render @article.comments %>

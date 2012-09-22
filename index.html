@@ -1170,6 +1170,37 @@ end
       </article>
       
       <article>
+        <h3>1. Create Helper</h3>
+        <pre>
+# app/helpers/articles_helper.rb
+module ArticlesHelper
+  def join_tags(article)
+    article.tags.map { |t| t.name }.join(', ')
+  end
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>2. Update View</h3>
+        <pre>
+&lt;!-- app/views/articles/show.html.erb --&gt;
+&lt;p>&lt;b>Title:&lt;/b> <%= @article.title %>&lt;/p>
+&lt;p>&lt;b>Content:&lt;/b> <%= @article.content %>&lt;/p>
+&lt;p>&lt;b>Tags:&lt;/b> <%= join_tags @article %>&lt;/p>
+
+&lt;h2>Comments&lt;/h2>
+<%= render @article.comments %>
+ 
+&lt;h2>Add Comment&lt;/h2>
+<%= render 'comments/form' %>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+</pre>
+      </article>
+      
+      <article>
         <h1>Popular Projects</h1>
       </article>
       
