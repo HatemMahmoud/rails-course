@@ -3,9 +3,7 @@
 one:
   article: 
   name: MyString
-  content: MyText
 
 two:
   article: 
   name: MyString
-  content: MyText

@@ -502,7 +502,9 @@ end</pre>
         <pre>
 # app/models/article.rb
 class Article < ActiveRecord::Base
-end</pre>
+  attr_accessible :title, :content
+end
+</pre>
       </article>
       
       <article>
@@ -734,7 +736,7 @@ end
   <% if @article.errors.any? %>
     &lt;div id="error_explanation">
       &lt;h2>
-       <%= pluralize(@article.errors.count, "error") %>
+       <%= pluralize(@article.errors.count, 'error') %>
        prohibited this article from being saved:
       &lt;/h2>
       &lt;ul>
@@ -768,6 +770,7 @@ end
         <pre>
 # app/models/article.rb
 class Article < ActiveRecord::Base
+  attr_accessible :title, :content
   validates :title, :presence => true,
                     :length => { :minimum => 5 }
   validates :content, :presence => true
@@ -859,6 +862,7 @@ $ rails generate model comment article:references name:string content:text</pre>
         <pre>
 # app/models/comment.rb
 class Comment < ActiveRecord::Base
+  attr_accessible :name, :content
   belongs_to :article
 end
 </pre>
@@ -901,6 +905,7 @@ $ rake db:migrate</pre>
         <pre>
 # app/models/article.rb
 class Article < ActiveRecord::Base
+  attr_accessible :title, :content
   validates :title, :presence => true,
                     :length => { :minimum => 5 }
   validates :content, :presence => true
@@ -945,7 +950,7 @@ $ rails generate controller comments</pre>
       </article>
       
       <article>
-        <h3>Add Actions</h3>
+        <h3>6. Add Actions</h3>
         <pre>
 # app/controllers/comments_controller.rb
 class CommentsController < ApplicationController
@@ -966,7 +971,7 @@ end
       </article>
       
       <article>
-        <h3>6. Update Views</h3>
+        <h3>7. Update Views</h3>
         <pre>
 &lt;!-- app/views/articles/show.html.erb --&gt;
 &lt;p>&lt;b>Title:&lt;/b> <%= @article.title %>&lt;/p>
@@ -984,7 +989,7 @@ end
       </article>
       
       <article>
-        <h3>6. Update Views</h3>
+        <h3>7. Update Views</h3>
         <pre>
 &lt;!-- app/views/comments/_comment.html.erb --&gt;
 &lt;p>
@@ -996,7 +1001,7 @@ end
       </article>
       
       <article>
-        <h3>6. Update Views</h3>
+        <h3>7. Update Views</h3>
         <pre>
 &lt;!-- app/views/comments/_form.html.erb --&gt;
 <%= form_for([@article, @article.comments.new]) do |f| %>
@@ -1021,6 +1026,143 @@ end
       
       <article>
         <h1>Nested Models</h1>
+      </article>
+      
+      <article>
+        <h3>1. Generate Model</h3>
+        <pre>
+$ rails generate model tag article:references name:string</pre>
+        <pre>
+  invoke  active_record
+  create    db/migrate/20120922085451_create_tags.rb
+  create    app/models/tag.rb
+  invoke    test_unit
+  create      test/unit/tag_test.rb
+  create      test/fixtures/tags.yml
+</pre>
+      </article>
+      
+      <article>
+        <h3>2. Run Migration</h3>
+        <pre>
+$ rake db:migrate</pre>
+        <pre>
+==  CreateTags: migrating =====================================================
+-- create_table(:tags)
+   -> 0.0054s
+-- add_index(:tags, :article_id)
+   -> 0.0004s
+==  CreateTags: migrated (0.0060s) ============================================
+</pre>
+      </article>
+      
+      <article>
+        <h3>3. Accept Nested Attributes</h3>
+        <pre>
+# app/models/article.rb
+class Article < ActiveRecord::Base
+  attr_accessible :title, :content, :tags_attributes
+  validates :title, :presence => true,
+                    :length => { :minimum => 5 }
+  validates :content, :presence => true
+  has_many :comments, :dependent => :destroy
+  has_many :tags
+  accepts_nested_attributes_for :tags,
+    :allow_destroy => :true,
+    :reject_if => proc { |attrs| attrs.all? { |k, v| v.blank? } }
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>4. Update Controller</h3>
+        <pre>
+# app/controllers/articles_controller.rb
+class ArticlesController < ApplicationController
+  ...
+  def new
+    @article = Article.new
+    3.times { @article.tags.new }
+  end
+
+  def edit
+    @article = Article.find(params[:id])
+    3.times { @article.tags.new }
+  end
+  ...
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>5. Update Views</h3>
+        <pre>
+&lt;!-- app/views/articles/_form.html.erb --&gt;
+<%= form_for(@article) do |f| %>
+  ...
+  &lt;div class="field">
+    <%= f.label :title %>&lt;br />
+    <%= f.text_field :title %>
+  &lt;/div>
+  &lt;div class="field">
+    <%= f.label :content %>&lt;br />
+    <%= f.text_area :content %>
+  &lt;/div>
+  &lt;h2>Tags&lt;/h2>
+  <%= render 'tags/form', form: f %>
+  &lt;div class="actions">
+    <%= f.submit %>
+  &lt;/div>
+<% end %>
+</pre>
+      </article>
+      
+      <article>
+        <h3>5. Update Views</h3>
+        <pre>
+&lt;!-- app/views/tags/_form.html.erb --&gt;
+<%= form.fields_for :tags do |f| %>
+  &lt;div class="field">
+    <%= f.label :name, 'Tag:' %>
+    <%= f.text_field :name %>
+  <% unless f.object.nil? || f.object.new_record? %>
+    <%= f.check_box :_destroy %>
+    <%= f.label :_destroy, 'Remove' %>
+  <% end %>
+  &lt;/div>
+<% end %>
+</pre>
+      </article>
+      
+      <article>
+        <h3>5. Update Views</h3>
+        <pre>
+&lt;!-- app/views/articles/show.html.erb --&gt;
+&lt;p>&lt;b>Title:&lt;/b> <%= @article.title %>&lt;/p>
+&lt;p>&lt;b>Content:&lt;/b> <%= @article.content %>&lt;/p>
+&lt;p>&lt;b>Tags:&lt;/b> <%= @article.tags.map { |t| t.name }.join(', ') %>&lt;/p>
+
+&lt;h2>Comments&lt;/h2>
+<%= render @article.comments %>
+ 
+&lt;h2>Add Comment&lt;/h2>
+<%= render 'comments/form' %>
+
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%= link_to 'Back', articles_path %>
+</pre>
+      </article>
+      
+      <article class="full">
+        <img src="images/articles-tags-new.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/articles-tags-created.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/articles-tags-edit.png" />
       </article>
       
       <article>
