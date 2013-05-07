@@ -211,6 +211,14 @@ $ rails -v
       </article>
       
       <article>
+        <h3>Ruby Versions</h3>
+        <ul>
+          <li>Rails 3 requires Ruby 1.8.7 or higher</li>
+          <li>Rails 4 requires Ruby 1.9.3 or higher</li>
+        </ul>
+      </article>
+      
+      <article>
         <h1>Hello, World!</h1>
       </article>
       
@@ -831,6 +839,69 @@ irb(main):007:0> Article.last.title
       </article>
       
       <article>
+        <h3>New Attribute: Migration</h3>
+        <pre>
+$ rails g migration AddPublishedToArticles published:boolean
+    invoke  active_record
+    create    db/migrate/20130507074102_add_published_to_articles.rb
+</pre>
+      <pre>
+# db/migrate/20130507074102_add_published_to_articles.rb
+class AddPublishedToArticles < ActiveRecord::Migration
+  def change
+    add_column :articles, :published, :boolean, default: false
+  end
+end</pre>
+        <pre>
+$ rake db:migrate
+==  AddPublishedToArticles: migrating =========================================
+-- add_column(:articles, :published, :boolean, {:default=>false})
+   -> 0.0051s
+==  AddPublishedToArticles: migrated (0.0053s) ================================</pre>
+      </article>
+      
+      <article>
+        <h3>New Attribute: Model</h3>
+        <pre>
+# app/models/article.rb
+class Article < ActiveRecord::Base
+  attr_accessible :title, :content, :published
+  validates :title, presence: true, length: { minimum: 5 }
+  validates :content, presence: true 
+end
+</pre>
+      </article>
+      
+      <article>
+        <h3>New Attribute: View</h3>
+        <pre>
+&lt;!-- app/views/articles/_form.html.erb --&gt;
+<%= form_for(@article) do |f| %>
+  ...
+  &lt;div class="field">
+    <%= f.label :title %>&lt;br />
+    <%= f.text_field :title %>
+  &lt;/div>
+  &lt;div class="field">
+    <%= f.label :content %>&lt;br />
+    <%= f.text_area :content %>
+  &lt;/div>
+  &lt;div class="field">
+    <%= f.check_box :published %>
+    <%= f.label :published %>
+  &lt;/div>
+  &lt;div class="actions">
+    <%= f.submit %>
+  &lt;/div>
+<% end %>
+</pre>
+      </article>
+      
+      <article class="full">
+        <img src="images/articles-edit-published.png" />
+      </article>
+      
+      <article>
         <h1>Associated Models</h1>
       </article>
       
@@ -1166,7 +1237,7 @@ end
 # app/helpers/articles_helper.rb
 module ArticlesHelper
   def join_tags(article)
-    article.tags.map { |t| t.name }.join(', ')
+    article.tags.map{ |t| t.name }.join(', ')
   end
 end
 </pre>
@@ -1249,6 +1320,10 @@ end
       
       <article class="full">
         <img src="images/rails-for-zombies.png" />
+      </article>
+      
+      <article class="full">
+        <img src="images/saas-course.png" />
       </article>
       
       <article class="full">
